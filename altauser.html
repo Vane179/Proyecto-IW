@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta Usuario</title>
+    <link rel="shortcut icon" href="hamburguesa.png">
+</head>
+<body>
+    <p><center>ALTA USUARIO</center></p>
+    <p><center><img src="pizza.png" width="30px" height="30px"></center></p>
+    <br>
+    <hr>
+    <form class="formulario" >
+        <div>
+            <label>Nombre</label>
+            <input type="text" placeholder="Nombre" id="nombre">
+        </div> 
+        <br><br>    
+        <div>
+            <label>Correo</label>
+            <input type="email" placeholder="ejemplo@gmail.com" id="correo">
+        </div>
+        <br><br>
+        <div>
+            <label>Telefono</label>
+            <input type="text" placeholder="Ej. 5523241243" id="telefono">
+        </div>
+        <br><br>
+        
+        <div>
+            <label>Fecha de nacimiento</label>
+            <input type="date" placeholder="dd/mm/aa" id="Fecha" min="2" max="4">
+        </div>
+        <br><br>
+        <div>
+            <label>Domicilio</label>
+            <input type="text" placeholder="Domicilio" id="domicilio">
+        </div> 
+        <br><br>
+        <input type="submit" value="Alta Usuario" class="agregar">
+        <br><br>
+        <hr>
+    </form>
+
+    <table id="listado" class='hide'>
+        <thead>
+            <th>Nombre</th>
+            <th>Correo </th>
+            <th>Teléfono </th>
+            <th>Domicilio</th>
+            <th>Opciones</th>
+
+        </thead>
+        <tbody>
+        </tbody>  
+    </table>
+    <hr>
+    <br><br>
+        
+        <a href ="landingpage.html">
+            <center><input type="submit" value="Regresar a Inicio"></center>
+        </a>
+    
+</body>
+</html>
+
+<script>
+ 
+ document.querySelector("input[class=agregar]").addEventListener("click",function(e){
+    e.preventDefault();
+ 
+    const nombre=document.querySelector("input[id=nombre]");
+    const correo=document.querySelector("input[id=correo]");
+    const telefono=document.querySelector("input[id=telefono]");
+    const domicilio=document.querySelector("input[id=domicilio]");
+    
+    const tr=document.createElement("tr");
+    
+    const tdNombre=document.createElement("td");
+    let txt=document.createTextNode(nombre.value);
+    tdNombre.appendChild(txt);
+    tdNombre.className="nombre";
+ 
+    const tdCorreo=document.createElement("td");
+    txt=document.createTextNode(correo.value);
+    tdCorreo.appendChild(txt);
+    tdCorreo.className="right";
+
+    const tdTelefono=document.createElement("td");
+    txt=document.createTextNode(telefono.value);
+    tdTelefono.appendChild(txt);
+    tdTelefono.className="right";
+
+    const tdDomicilio=document.createElement("td");
+    txt=document.createTextNode(domicilio.value);
+    tdDomicilio.appendChild(txt);
+    tdDomicilio.className="right";
+
+ 
+    const tdRemove=document.createElement("td");
+    const buttonRemove=document.createElement("img");
+    buttonRemove.src="garbage.png";
+    buttonRemove.onclick=function () {
+        // elimina la columna
+        this.closest("tr").remove();
+ 
+        // Si no hay ningun elemento en la columna, escondemos la tabla
+        if(document.getElementById("listado").querySelector("tbody").querySelectorAll("tr").length==0)
+        {
+            document.getElementById("listado").classList.add("hide");
+        }
+    };
+    tdRemove.appendChild(buttonRemove);
+ 
+    tr.appendChild(tdNombre);
+    tr.appendChild(tdCorreo);
+    tr.appendChild(tdTelefono);
+    tr.appendChild(tdDomicilio);
+    tr.appendChild(tdRemove);
+ 
+    const tbody=document.getElementById("listado").querySelector("tbody").appendChild(tr);
+ 
+    // eliminamos la clase que tiene oculta la tabla cando no hay ningun alumno
+    document.getElementById("listado").classList.remove("hide");
+ 
+    //limpiamos los valores del input
+    domicilio.value="";
+    telefono.value="";
+    correo.value="";
+    nombre.value="";
+    nombre.focus();
+    
+    
+});
+
+</script>
